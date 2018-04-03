@@ -1,23 +1,26 @@
 //business logic
 Address.prototype.fullAddress = function() {
-  return this.street + ", " + this.city + ", " + this.state;
+  return this.street + ", " + this.city + ", " + this.state + ", "+this.type;
 }
 function Contact(first, last) {
   this.firstName = first;
   this.lastName = last;
   this.addresses = [];
 }
-function Address(street, city, state) {
+function Address(street, city, state, type) {
   this.street = street;
   this.city = city;
   this.state = state;
+  this.type = type;
 }
 function resetFields() {
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-    $("input.new-street").val("");
-    $("input.new-city").val("");
-    $("input.new-state").val("");
+  console.log("reset")
+    // $("input#new-first-name").val("");
+    // $("input#new-last-name").val("");
+    // $("input.new-street").val("");
+    // $("input.new-city").val("");
+    // $("input.new-state").val("");
+    // 
 }
 
 // user interface logic
@@ -36,6 +39,11 @@ $(document).ready(function() {
                                    '<label for="new-state">State</label>' +
                                    '<input type="text" class="form-control new-state">' +
                                  '</div>' +
+                                 '<div>'+
+                                   '<input type="checkbox" name="address-type" value="home">Home<br>'+
+                                   '<input type="checkbox" name="address-type" value="work">Work.<br>'+
+                                   '<input type="checkbox" name="address-type" value="other">Other.<br>'+
+                                 '</div>' +
                                '</div>');
   });
   $("form#new-contact").submit(function(event) {
@@ -50,7 +58,12 @@ $(document).ready(function() {
       var inputtedStreet = $(this).find("input.new-street").val();
       var inputtedCity = $(this).find("input.new-city").val();
       var inputtedState = $(this).find("input.new-state").val();
-      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState);
+      var inputtedType;
+      $("input:checkbox[name=address-type]:checked").each(function(){
+        inputtedType = $(this).val();
+        console.log(inputtedType);
+      });
+      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState, inputtedType);
       newContact.addresses.push(newAddress);
     });
 
@@ -71,5 +84,11 @@ $(document).ready(function() {
     $("input.new-street").val("");
     $("input.new-city").val("");
     $("input.new-state").val("");
+
   });
+  $("form#reset").submit(function() {
+    console.log("resetSubmit")
+    resetFields();
+  });
+
 });

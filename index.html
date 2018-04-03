@@ -38,10 +38,19 @@
                   <input type="text" class="form-control new-state">
                 </div>
               </div>
+              <div id="checkbox">
+                <input type="checkbox" name="address-type" value="home">Home<br>
+                <input type="checkbox" name="address-type" value="work">Work.<br>
+                <input type="checkbox" name="address-type" value="other">Other.<br>
+              </div>
             </div>
+
             <span class="btn btn-primary" id="add-address">Another address</span>
 
             <button type="submit" class="btn">Add</button>
+          </form>
+          <form id="reset">
+            <button type="submit" class="btn">Remove Fields</button>
           </form>
 
           <h2>Contacts:</h2>
